@@ -1,0 +1,19 @@
+{
+  "name": "Chromatar-node",
+  "version": "0.0.1",
+  "scripts": {
+    "install": "mv config.example.json config.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glenwayguy/Chromatar-node.git"
+  },
+  "contributors": [
+    "Charley Hutchison <charley@charleyhutchison.com> (http://charleyhutchison.com)",
+    "Will Smidlein <Will@WillSmidlein.com> (http://willsmidlein.com/)"
+  ],
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/glenwayguy/Chromatar-node/issues"
+  }
+}
