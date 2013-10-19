@@ -20,7 +20,9 @@
     "express": "latest",
     "passport": "latest",
     "passport-twitter": "latest",
-    "gm": "~1.13.2",
+    "gm": "~1.13.2"
+  },
+  "devDependencies": {
     "mocha": "~1.13.0",
     "chai": "~1.8.1"
   }
