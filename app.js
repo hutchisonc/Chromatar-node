@@ -1,4 +1,5 @@
 var express = require('express')
+var hbs = require('express3-handlebars')
 var passport = require('passport')
 var TwitterStrategy = require('passport-twitter').Strategy
 var config = require('./config.json')
@@ -37,6 +38,8 @@ passport.deserializeUser(function(id, done) {
 	})
 })
 
+app.engine('handlebars', hbs({ defaultLayout: 'main'}))
+app.set('view engine', 'handlebars')
 app.use(express.cookieParser())
 app.use(express.cookieSession({ secret: 'kittens'}))
 app.use(passport.initialize())
@@ -45,7 +48,7 @@ app.use(app.router)
 
 
 app.get('/', function(req, res) {
-	res.send('Ohai there, ' + req.user.username)
+	res.render('home', {user: req.user.username})
 })
 app.get('/auth/twitter', passport.authenticate('twitter'))
 app.get('/auth/twitter/callback', 
