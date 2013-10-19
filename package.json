@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "latest",
     "passport": "latest",
-    "passport-twitter": "latest"
+    "passport-twitter": "latest",
+    "gm": "~1.13.2"
   }
 }
