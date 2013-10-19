@@ -1,6 +1,7 @@
 var express = require('express')
 var hbs = require('express3-handlebars')
 var passport = require('passport')
+var fileUpload = require('./fileUpload')
 var TwitterStrategy = require('passport-twitter').Strategy
 var config = require('./config.json')
 var mysql = require('mysql')
@@ -38,6 +39,7 @@ passport.deserializeUser(function(id, done) {
 	})
 })
 
+app.use(express.bodyParser({ uploadDir: './images'}))
 app.engine('handlebars', hbs({ defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 app.use(express.cookieParser())
@@ -50,6 +52,10 @@ app.use(app.router)
 app.get('/', function(req, res) {
 	res.render('home', {user: req.user.username})
 })
+app.get('/configure', function(req, res) {
+	res.render('configure')
+})
+app.post('/configure', fileUpload.postFile)
 app.get('/auth/twitter', passport.authenticate('twitter'))
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { successRedirect: '/',
