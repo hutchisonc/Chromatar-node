@@ -21,6 +21,7 @@
     "passport": "latest",
     "passport-twitter": "latest",
     "gm": "~1.13.2",
-    "mocha": "~1.13.0"
+    "mocha": "~1.13.0",
+    "chai": "~1.8.1"
   }
 }
