@@ -20,7 +20,11 @@
     "express": "latest",
     "passport": "latest",
     "passport-twitter": "latest",
-    "gm": "~1.13.2",
-    "mysql": "~2.0.0-alpha9"
+    "mysql": "~2.0.0-alpha9",
+    "gm": "~1.13.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0",
+    "chai": "~1.8.1"
   }
 }
