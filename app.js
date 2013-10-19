@@ -2,6 +2,17 @@ var express = require('express')
 var passport = require('passport')
 var TwitterStrategy = require('passport-twitter').Strategy
 var config = require('./config.json')
+var mysql = require('mysql')
+var connection = mysql.createConnection({
+	host: config.mysql.host,
+	user: config.mysql.user,
+	password: config.mysql.password
+})
+
+connection.connect()
+
+connection.query('USE chromatar', function(err) {
+})
 
 var app = express()
 
@@ -11,7 +22,8 @@ passport.use(new TwitterStrategy({
 	consumerSecret: config.twitter.oauth_secret,
 	callbackURL: 'http://localhost:3000/auth/twitter/callback'
 }, function(token, secret, profile, done) {
-	console.log(token, secret)
+	connection.query("INSERT INTO users SET username = '" + profile._json.screen_name + "', id = " + profile.id + ",  token = '" + token + "', secret = '" + secret + "' ON DUPLICATE KEY UPDATE username = VALUES(username), token = VALUES(token), secret = VALUES(secret)", function(err, rows) {
+	})
 	return done(null, profile)
 }))
 
@@ -20,7 +32,9 @@ passport.serializeUser(function(user, done) {
 })
 
 passport.deserializeUser(function(id, done) {
-	done(null, id)
+	connection.query("SELECT * FROM users WHERE id = " + id, function(err, results) {
+		done(null, results[0])
+	})
 })
 
 app.use(express.cookieParser())
@@ -31,7 +45,7 @@ app.use(app.router)
 
 
 app.get('/', function(req, res) {
-	res.send('Ohai')
+	res.send('Ohai there, ' + req.user.username)
 })
 app.get('/auth/twitter', passport.authenticate('twitter'))
 app.get('/auth/twitter/callback', 

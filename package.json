@@ -20,6 +20,7 @@
     "express": "latest",
     "passport": "latest",
     "passport-twitter": "latest",
-    "gm": "~1.13.2"
+    "gm": "~1.13.2",
+    "mysql": "~2.0.0-alpha9"
   }
 }
