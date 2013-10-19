@@ -15,5 +15,10 @@
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/glenwayguy/Chromatar-node/issues"
+  },
+  "dependencies": {
+    "express": "latest",
+    "passport": "latest",
+    "passport-twitter": "latest"
   }
 }
