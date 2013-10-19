@@ -11,3 +11,18 @@ describe("Image Helper Tests", function() {
     })
 
 })
+
+var randomColor = require(rootDir + '/lib/randomColor.js')
+describe("Random Color Tests", function() {
+	it("should be a function", function() {
+		randomColor.should.be.a('function')
+	})
+	it("Should return a hex color", function() {
+		randomColor(function(err, color) {
+			should.exist(color)
+			color.should.be.a('string')
+			color.should.have.string('#')
+			color.length.should.equal(7)
+		})
+	})
+})
