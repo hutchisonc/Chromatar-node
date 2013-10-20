@@ -4,17 +4,8 @@ var passport = require('passport')
 var fileUpload = require('./fileUpload')
 var TwitterStrategy = require('passport-twitter').Strategy
 var config = require('./config.json')
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-	host: config.mysql.host,
-	user: config.mysql.user,
-	password: config.mysql.password
-})
-
-connection.connect()
-
-connection.query('USE chromatar', function(err) {
-})
+var connection = require('./connection.js').connection
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
 
 var app = express()
 
@@ -50,15 +41,15 @@ app.use(app.router)
 
 
 app.get('/', function(req, res) {
-	res.render('home', {user: req.user.username})
+	res.render('home', {user: req.user})
 })
-app.get('/configure', function(req, res) {
+app.get('/configure', ensureLoggedIn('/'), function(req, res) {
 	res.render('configure')
 })
 app.post('/configure', fileUpload.postFile)
 app.get('/auth/twitter', passport.authenticate('twitter'))
 app.get('/auth/twitter/callback', 
-  passport.authenticate('twitter', { successRedirect: '/',
+  passport.authenticate('twitter', { successRedirect: '/configure',
                                      failureRedirect: '/' }))
 
 
