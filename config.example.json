@@ -1,0 +1,14 @@
+{
+
+        "twitter": {
+                "oauth_token": "",
+                "oauth_secret": ""
+        },
+
+        "mysql": {
+        		"host": "",
+        		"user": "",
+        		"password": ""
+        }
+
+}
