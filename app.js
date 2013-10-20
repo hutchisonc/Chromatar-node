@@ -41,7 +41,8 @@ app.use(app.router)
 
 
 app.get('/', function(req, res) {
-	res.render('home', {user: req.user})
+	if(req.user) res.redirect('/configure')
+	res.render('home')
 })
 app.get('/configure', ensureLoggedIn('/'), function(req, res) {
 	res.render('configure')
