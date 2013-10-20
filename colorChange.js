@@ -4,10 +4,18 @@ var config = require('./config.json')
 var imageHelper = require('./lib/imageHelper.js')
 var randomColor = require('./lib/randomColor.js')
 var fs = require('fs')
+var schedule = require('node-schedule');
 
-connection.query("SELECT * FROM users WHERE path IS NOT NULL", function(err, rows) {
-	rows.forEach(changeBackgroundColor)
-})
+var rule = new schedule.RecurrenceRule();
+rule.hour = 0
+rule.minute = 0
+
+var colorChange = schedule.scheduleJob(rule, function(){
+	connection.query("SELECT * FROM users WHERE path IS NOT NULL", function(err, rows) {
+		rows.forEach(changeBackgroundColor)
+	})
+}
+
 
 function changeBackgroundColor(user) {
 	var twitterAPI = new Twit({
@@ -22,7 +30,6 @@ function changeBackgroundColor(user) {
 					if(err){
 						if(err.code === 89 || err.message === 'Invalid or expired token') {
 							connection.query('DELETE FROM users WHERE id = ' + user.id, function(err) {
-								
 							})
 						}
 					}
