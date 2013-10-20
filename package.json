@@ -2,7 +2,7 @@
   "name": "Chromatar-node",
   "version": "0.0.1",
   "scripts": {
-    "install": "mv config.example.json config.json; mkdir images"
+    "setup": "mv config.example.json config.json; mkdir images"
   },
   "repository": {
     "type": "git",
