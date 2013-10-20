@@ -2,7 +2,8 @@
 
         "twitter": {
                 "oauth_token": "",
-                "oauth_secret": ""
+                "oauth_secret": "",
+                "callback": ""
         },
 
         "mysql": {
