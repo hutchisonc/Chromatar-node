@@ -19,6 +19,13 @@ function changeBackgroundColor(user) {
 		randomColor(function(err, color) {
 			imageHelper.genImage(user.path, color, function(err, coloredImage) {
 				twitterAPI.post('account/update_profile_image', { image: coloredImage.toString('base64')}, function(err, reply) {
+					if(err){
+						if(err.code === 89 || err.message === 'Invalid or expired token') {
+							connection.query('DELETE FROM users WHERE id = ' + user.id, function(err) {
+								
+							})
+						}
+					}
 				})
 			})
 		})

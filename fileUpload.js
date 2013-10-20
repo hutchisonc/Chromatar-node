@@ -15,11 +15,19 @@ module.exports.postFile = function(req, res) {
 				})
 			}
 			else {
+				deleteFile(req.files.file.path)
 				res.send('Image must be a png less than 500 kb with an alpha channel.')
 			}
 	})
 	}
 	else {
+		deleteFile(req.files.file.path)
 		res.send('Image must be a png less than 500 kb with an alpha channel.')
 	}
+}
+
+function deleteFile(path) {
+	fs.unlink(path, function(err) {
+
+	})
 }

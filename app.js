@@ -26,7 +26,12 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
 	connection.query("SELECT * FROM users WHERE id = " + id, function(err, results) {
-		done(null, results[0])
+		if(results[0]) {
+			done(null, results[0])
+		}
+		else {
+			done(null, "destroy")
+		}
 	})
 })
 
@@ -37,6 +42,12 @@ app.use(express.cookieParser())
 app.use(express.cookieSession({ secret: 'kittens'}))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(function(req, res, next) {
+	if(req.user === "destroy") {
+		req.logout()
+	}
+	next()
+})
 app.use(app.router)
 
 
