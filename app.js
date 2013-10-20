@@ -13,7 +13,7 @@ var app = express()
 passport.use(new TwitterStrategy({
 	consumerKey: config.twitter.oauth_token,
 	consumerSecret: config.twitter.oauth_secret,
-	callbackURL: 'http://localhost:3000/auth/twitter/callback'
+	callbackURL: config.twitter.callback
 }, function(token, secret, profile, done) {
 	connection.query("INSERT INTO users SET username = '" + profile._json.screen_name + "', id = " + profile.id + ",  token = '" + token + "', secret = '" + secret + "' ON DUPLICATE KEY UPDATE username = VALUES(username), token = VALUES(token), secret = VALUES(secret)", function(err, rows) {
 	})
