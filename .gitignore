@@ -16,7 +16,7 @@ results
 npm-debug.log
 node_modules
 
-image/*
+images/*
 
 ###Private Stuff###
 config.json
