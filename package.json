@@ -24,7 +24,8 @@
     "gm": "~1.13.2",
     "express3-handlebars": "~0.5.0",
     "connect-ensure-login": "~0.1.1",
-    "node-schedule": "latest"
+    "node-schedule": "latest",
+    "twit": "latest"
   },
   "devDependencies": {
     "mocha": "~1.13.0",
